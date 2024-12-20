@@ -1,7 +1,9 @@
+import com.vanniktech.maven.publish.SonatypeHost
+
 plugins {
     alias(libs.plugins.android.library)
     alias(libs.plugins.jetbrains.kotlin.android)
-    `maven-publish`
+    alias(libs.plugins.maven.publish)
 }
 
 android {
@@ -63,19 +65,39 @@ dependencies {
     debugImplementation(libs.androidx.ui.test.manifest)
 }
 
-afterEvaluate {
-    publishing {
-        publications {
-            register<MavenPublication>("release") {
-                groupId = "com.github.DongChyeon"
-                artifactId = "PhotoCalendar"
-                version = "1.0.0"
+mavenPublishing {
+    publishToMavenCentral(SonatypeHost.CENTRAL_PORTAL)
 
-                pom {
-                    name.set("PhotoCalendar")
-                    description.set("This project features a customizable Jetpack Compose calendar that allows you to add background images to specific days.")
-                }
+    signAllPublications()
+
+    coordinates("io.github.dongchyeon", "photo-calendar", "1.0.0")
+
+    pom {
+        name.set("PhotoCalendar")
+        description.set("This project features a customizable Jetpack Compose calendar that allows you to add background images to specific days.")  // 라이브러리 설명
+        url.set("https://github.com/DongChyeon/PhotoCalendar.git")
+        inceptionYear.set("2024")
+
+        licenses {
+            license {
+                name.set("The Apache License, Version 2.0")
+                url.set("http://www.apache.org/licenses/LICENSE-2.0.txt")
+                distribution.set("http://www.apache.org/licenses/LICENSE-2.0.txt")
             }
+        }
+
+        developers {
+            developer {
+                id.set("DongChyeon")
+                name.set("DongChyeon")
+                url.set("https://github.com/DongChyeon")
+            }
+        }
+
+        scm {
+            url.set("https://github.com/DongChyeon/PhotoCalendar.git")
+            connection.set("scm:git:git://github.com/DongChyeon/PhotoCalendar.git")
+            developerConnection.set("scm:git:ssh://git@github.com:DongChyeon/PhotoCalendar.git")
         }
     }
 }
