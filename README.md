@@ -1,8 +1,10 @@
-## Photo Calendar - A customizable Jetpack Compose calendar that allows you to add background image to specific days.
-
 ![Maven Central: Photo Calendar](https://img.shields.io/maven-central/v/io.github.dongchyeon/photo-calendar?color=orange&label=Maven%20Central%20%3A%20Photo%20Calendar)
 ![Minimum SDK: 24](https://img.shields.io/badge/Minimum%20SDK-24-yellowgreen)
 <a href="https://opensource.org/licenses/Apache-2.0"><img alt="License" src="https://img.shields.io/badge/License-Apache%202.0-blue.svg"/></a>
+
+## Photo Calendar - A customizable Jetpack Compose calendar that allows you to add background image to specific days.
+
+![photo_calendar](https://github.com/user-attachments/assets/bbe5acbe-302b-45be-a341-1ee105ccf310)
 
 A fully customizable calendar component for Jetpack Compose.<br>
 It supports both horizontal scrolling calendars and grid-based calendars.<br>
