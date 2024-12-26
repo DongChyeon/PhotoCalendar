@@ -138,7 +138,7 @@ fun MonthSelector(
         ) {
             Icon(
                 painter = painterResource(
-                    id = R.drawable.ic_arrow_left
+                    id = R.drawable.lib_ic_arrow_left
                 ),
                 tint = Color.Unspecified,
                 contentDescription = null
@@ -159,7 +159,7 @@ fun MonthSelector(
         ) {
             Icon(
                 painter = painterResource(
-                    id = R.drawable.ic_arrow_right
+                    id = R.drawable.lib_ic_arrow_right
                 ),
                 tint = Color.Unspecified,
                 contentDescription = null

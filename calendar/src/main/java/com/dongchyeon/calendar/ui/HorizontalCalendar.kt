@@ -163,7 +163,7 @@ private fun HorizontalCalendarHeader(
             verticalAlignment = Alignment.CenterVertically
         ) {
             Icon(
-                painter = painterResource(id = R.drawable.ic_arrow_left),
+                painter = painterResource(id = R.drawable.lib_ic_arrow_left),
                 contentDescription = null,
                 tint = config.textColor,
                 modifier = Modifier
@@ -174,7 +174,7 @@ private fun HorizontalCalendarHeader(
             )
 
             Icon(
-                painter = painterResource(id = R.drawable.ic_arrow_right),
+                painter = painterResource(id = R.drawable.lib_ic_arrow_right),
                 contentDescription = null,
                 tint = config.textColor,
                 modifier = Modifier
