@@ -1,8 +1,6 @@
 package com.dongchyeon.calendar.ui
 
 import android.annotation.SuppressLint
-import android.os.Build
-import androidx.annotation.RequiresApi
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
@@ -114,7 +112,7 @@ fun Calendar(
 }
 
 @Composable
-fun MonthSelector(
+private fun MonthSelector(
     modifier: Modifier = Modifier,
     config: CalendarHeaderConfig,
     calendarLanguage: CalendarLanguage,
@@ -176,7 +174,7 @@ fun MonthSelector(
 }
 
 @Composable
-fun WeekHeader(
+private fun WeekHeader(
     modifier: Modifier = Modifier,
     itemWidth: Dp,
     config: CalendarWeekHeaderConfig,
@@ -212,7 +210,7 @@ fun WeekHeader(
 
 @SuppressLint("NewApi")
 @Composable
-fun Week(
+private fun Week(
     modifier: Modifier = Modifier,
     itemWidth: Dp,
     events: List<CalendarEvent>,
