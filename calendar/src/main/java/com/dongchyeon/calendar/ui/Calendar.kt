@@ -1,5 +1,8 @@
 package com.dongchyeon.calendar.ui
 
+import android.annotation.SuppressLint
+import android.os.Build
+import androidx.annotation.RequiresApi
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
@@ -35,21 +38,27 @@ import com.dongchyeon.calendar.CalendarIndicatorConfig
 import com.dongchyeon.calendar.CalendarLanguage
 import com.dongchyeon.calendar.CalendarWeekHeaderConfig
 import com.dongchyeon.calendar.R
+import com.dongchyeon.calendar.model.DateYearMonth
 import com.dongchyeon.calendar.theme.CalendarTheme
 import com.dongchyeon.calendar.ui.component.DayBackgroundImage
+import com.dongchyeon.calendar.util.formatYearMonthInEnglish
+import com.dongchyeon.calendar.util.formatYearMonthInKorean
+import com.dongchyeon.calendar.util.getNumberWeeks
+import com.dongchyeon.calendar.util.minusMonths
 import com.dongchyeon.calendar.util.noRippleClickable
-import java.time.DayOfWeek
-import java.time.LocalDate
-import java.time.YearMonth
-import java.time.format.DateTimeFormatter
-import java.time.temporal.TemporalAdjusters
-import java.time.temporal.WeekFields
+import com.dongchyeon.calendar.util.now
+import com.dongchyeon.calendar.util.plusMonths
+import com.dongchyeon.calendar.util.previousOrSame
+import kotlinx.datetime.DatePeriod
+import kotlinx.datetime.DayOfWeek
+import kotlinx.datetime.LocalDate
+import kotlinx.datetime.plus
 
 @Composable
 fun Calendar(
     modifier: Modifier = Modifier,
     events: List<CalendarEvent> = emptyList(),
-    currentYearMonth: YearMonth = YearMonth.from(LocalDate.now()),
+    currentYearMonth: DateYearMonth = DateYearMonth.from(LocalDate.now()),
     selectedDate: LocalDate,
     headerConfig: CalendarHeaderConfig = CalendarHeaderConfig.default(),
     weekHeaderConfig: CalendarWeekHeaderConfig = CalendarWeekHeaderConfig.default(),
@@ -109,19 +118,17 @@ fun MonthSelector(
     modifier: Modifier = Modifier,
     config: CalendarHeaderConfig,
     calendarLanguage: CalendarLanguage,
-    yearMonth: YearMonth,
+    yearMonth: DateYearMonth,
     isTablet: Boolean,
     onPrevClick: () -> Unit,
     onNextClick: () -> Unit
 ) {
     val formattedMonth = when (calendarLanguage) {
         CalendarLanguage.EN -> {
-            val locale = java.util.Locale.ENGLISH
-            val formatter = DateTimeFormatter.ofPattern("MMMM yyyy", locale)
-            yearMonth.atDay(1).format(formatter) // e.g., "February 2024"
+            formatYearMonthInEnglish(yearMonth)
         }
         CalendarLanguage.KO -> {
-            "${yearMonth.year}년 ${yearMonth.monthValue}월" // e.g., "2024년 12월"
+            formatYearMonthInKorean(yearMonth)
         }
     }
 
@@ -203,21 +210,22 @@ fun WeekHeader(
     }
 }
 
+@SuppressLint("NewApi")
 @Composable
 fun Week(
     modifier: Modifier = Modifier,
     itemWidth: Dp,
     events: List<CalendarEvent>,
     weekNumber: Long,
-    currentMonth: YearMonth,
+    currentMonth: DateYearMonth,
     selectedDate: LocalDate,
     dayConfig: CalendarDayConfig,
     indicatorConfig: CalendarIndicatorConfig,
     isTablet: Boolean,
     onDayClicked: (LocalDate) -> Unit
 ) {
-    val beginningWeek = currentMonth.atDay(1).plusWeeks(weekNumber)
-    var currentDay = beginningWeek.with(TemporalAdjusters.previousOrSame(DayOfWeek.SUNDAY))
+    val beginningWeek = currentMonth.atDay(1).plus(DatePeriod(days = (weekNumber * 7).toInt()))
+    var currentDay = beginningWeek.previousOrSame(DayOfWeek.SUNDAY)
 
     Row(
         modifier = modifier.fillMaxWidth(),
@@ -225,7 +233,7 @@ fun Week(
         horizontalArrangement = Arrangement.SpaceBetween
     ) {
         for (i in 0..6) {
-            if (currentDay.month == currentMonth.month) {
+            if (currentDay.monthNumber == currentMonth.month) {
                 val matchedEvent = events.find {
                     it.date.year == currentDay.year &&
                     it.date.month == currentDay.month &&
@@ -245,7 +253,7 @@ fun Week(
             } else {
                 Box(modifier = Modifier.size(itemWidth))
             }
-            currentDay = currentDay.plusDays(1)
+            currentDay = currentDay.plus(DatePeriod(days = 1))
         }
     }
 }
@@ -311,13 +319,6 @@ private fun Day(
     }
 }
 
-fun YearMonth.getNumberWeeks(weekFields: WeekFields = WeekFields.SUNDAY_START): Int {
-    val firstWeekNumber = this.atDay(1)[weekFields.weekOfMonth()]
-    val lastWeekNumber = this.atEndOfMonth()[weekFields.weekOfMonth()]
-
-    return lastWeekNumber - firstWeekNumber + 1
-}
-
 @Preview
 @Composable
 fun PreviewCalendar() {
@@ -326,37 +327,37 @@ fun PreviewCalendar() {
 
         val events = listOf(
             CalendarEvent(
-                date = LocalDate.now().plusDays(1),
+                date = LocalDate.now().plus(DatePeriod(days = 1)),
                 imgUrl = "https://picsum.photos/200/300",
                 imgShape = CircleShape
             ),
             CalendarEvent(
-                date = LocalDate.now().plusDays(2),
+                date = LocalDate.now().plus(DatePeriod(days = 1)),
                 imgUrl = "https://picsum.photos/200/300",
                 imgShape = RoundedCornerShape(8.dp)
             ),
             CalendarEvent(
-                date = LocalDate.now().plusDays(3),
+                date = LocalDate.now().plus(DatePeriod(days = 1)),
                 imgUrl = "https://picsum.photos/200/300",
                 imgShape = CircleShape
             ),
             CalendarEvent(
-                date = LocalDate.now().plusDays(4),
+                date = LocalDate.now().plus(DatePeriod(days = 1)),
                 imgUrl = "https://picsum.photos/200/300",
                 imgShape = RoundedCornerShape(8.dp)
             ),
             CalendarEvent(
-                date = LocalDate.now().plusDays(5),
+                date = LocalDate.now().plus(DatePeriod(days = 1)),
                 imgUrl = "https://picsum.photos/200/300",
                 imgShape = CircleShape
             ),
             CalendarEvent(
-                date = LocalDate.now().plusDays(6),
+                date = LocalDate.now().plus(DatePeriod(days = 1)),
                 imgUrl = "https://picsum.photos/200/300",
                 imgShape = RoundedCornerShape(8.dp)
             ),
             CalendarEvent(
-                date = LocalDate.now().plusDays(7),
+                date = LocalDate.now().plus(DatePeriod(days = 1)),
                 imgUrl = "https://picsum.photos/200/300",
                 imgShape = CircleShape
             ),

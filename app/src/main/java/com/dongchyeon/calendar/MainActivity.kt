@@ -18,7 +18,10 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import com.dongchyeon.calendar.ui.Calendar
 import com.dongchyeon.calendar.ui.theme.DongChyeonCalendarTheme
-import java.time.LocalDate
+import com.dongchyeon.calendar.util.now
+import kotlinx.datetime.DatePeriod
+import kotlinx.datetime.LocalDate
+import kotlinx.datetime.plus
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -34,12 +37,12 @@ class MainActivity : ComponentActivity() {
 
                         val events = listOf(
                             CalendarEvent(
-                                date = LocalDate.now().plusDays(1),
+                                date = LocalDate.now().plus(DatePeriod(days = 1)),
                                 imgUrl = "https://picsum.photos/200/300",
                                 imgShape = CircleShape
                             ),
                             CalendarEvent(
-                                date = LocalDate.now().plusDays(2),
+                                date = LocalDate.now().plus(DatePeriod(days = 2)),
                                 imgUrl = "https://picsum.photos/200/300",
                                 imgShape = RoundedCornerShape(8.dp)
                             ),

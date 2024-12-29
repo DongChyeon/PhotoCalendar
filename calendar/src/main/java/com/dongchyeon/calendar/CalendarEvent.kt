@@ -2,7 +2,7 @@ package com.dongchyeon.calendar
 
 import androidx.compose.runtime.Immutable
 import androidx.compose.ui.graphics.Shape
-import java.time.LocalDate
+import kotlinx.datetime.LocalDate
 
 @Immutable
 data class CalendarEvent(
