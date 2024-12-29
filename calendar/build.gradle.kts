@@ -26,6 +26,7 @@ android {
             )
         }
     }
+
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_1_8
         targetCompatibility = JavaVersion.VERSION_1_8
@@ -42,7 +43,6 @@ android {
 }
 
 dependencies {
-
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.lifecycle.runtime.ktx)
     implementation(libs.androidx.activity.compose)
@@ -69,7 +69,7 @@ mavenPublishing {
 
     signAllPublications()
 
-    coordinates("io.github.dongchyeon", "photo-calendar", "1.0.0")
+    coordinates("io.github.dongchyeon", "photo-calendar", "1.0.1")
 
     pom {
         name.set("PhotoCalendar")
