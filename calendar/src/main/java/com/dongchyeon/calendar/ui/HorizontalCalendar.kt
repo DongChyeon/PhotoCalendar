@@ -1,5 +1,8 @@
 package com.dongchyeon.calendar.ui
 
+import android.annotation.SuppressLint
+import android.os.Build
+import androidx.annotation.RequiresApi
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
@@ -39,18 +42,27 @@ import com.dongchyeon.calendar.CalendarIndicatorConfig
 import com.dongchyeon.calendar.CalendarLanguage
 import com.dongchyeon.calendar.CalendarWeekHeaderConfig
 import com.dongchyeon.calendar.R
+import com.dongchyeon.calendar.model.DateYearMonth
 import com.dongchyeon.calendar.theme.CalendarTheme
 import com.dongchyeon.calendar.ui.component.DayBackgroundImage
+import com.dongchyeon.calendar.util.formatYearMonthInEnglish
+import com.dongchyeon.calendar.util.formatYearMonthInKorean
+import com.dongchyeon.calendar.util.minusMonths
 import com.dongchyeon.calendar.util.noRippleClickable
-import java.time.LocalDate
+import com.dongchyeon.calendar.util.now
+import com.dongchyeon.calendar.util.plusMonths
+import kotlinx.datetime.DatePeriod
 import java.time.YearMonth
 import java.time.format.DateTimeFormatter
+import kotlinx.datetime.LocalDate
+import kotlinx.datetime.format
+import kotlinx.datetime.plus
 
 @Composable
 fun HorizontalCalendar(
     modifier: Modifier = Modifier,
     events: List<CalendarEvent> = emptyList(),
-    currentYearMonth: YearMonth = YearMonth.from(LocalDate.now()),
+    currentYearMonth: DateYearMonth = DateYearMonth.from(LocalDate.now()),
     selectedDate: LocalDate = LocalDate.now(),
     headerConfig: CalendarHeaderConfig = CalendarHeaderConfig.default(),
     weekHeaderConfig: CalendarWeekHeaderConfig = CalendarWeekHeaderConfig.default(),
@@ -75,7 +87,7 @@ fun HorizontalCalendar(
         val days = mutableListOf<LocalDate>()
         for (i: Int in 1..selectedYearMonth.lengthOfMonth()) {
             days.add(currentDay)
-            currentDay = currentDay.plusDays(1)
+            currentDay = currentDay.plus(DatePeriod(days = 1))
         }
 
         HorizontalCalendarHeader(
@@ -96,7 +108,7 @@ fun HorizontalCalendar(
             items(days) { today ->
                 val matchedEvent = events.find {
                     it.date.year == today.year &&
-                            it.date.monthValue == today.monthValue &&
+                            it.date.monthNumber == today.monthNumber &&
                             it.date.dayOfMonth == today.dayOfMonth
                 }
 
@@ -127,7 +139,7 @@ fun HorizontalCalendar(
 @Composable
 private fun HorizontalCalendarHeader(
     modifier: Modifier = Modifier,
-    yearMonth: YearMonth,
+    yearMonth: DateYearMonth,
     config: CalendarHeaderConfig,
     calendarLanguage: CalendarLanguage,
     isTablet: Boolean,
@@ -136,12 +148,10 @@ private fun HorizontalCalendarHeader(
 ) {
     val formattedMonth = when (calendarLanguage) {
         CalendarLanguage.EN -> {
-            val locale = java.util.Locale.ENGLISH
-            val formatter = DateTimeFormatter.ofPattern("MMMM yyyy", locale)
-            yearMonth.atDay(1).format(formatter) // e.g., "February 2024"
+            formatYearMonthInEnglish(yearMonth)
         }
         CalendarLanguage.KO -> {
-            "${yearMonth.year}년 ${yearMonth.monthValue}월" // e.g., "2024년 12월"
+            formatYearMonthInKorean(yearMonth)
         }
     }
 
@@ -187,6 +197,7 @@ private fun HorizontalCalendarHeader(
     }
 }
 
+@SuppressLint("NewApi")
 @Composable
 private fun Day(
     modifier: Modifier = Modifier,
@@ -288,37 +299,37 @@ fun PreviewHorizontalCalendar() {
 
         val events = listOf(
             CalendarEvent(
-                date = LocalDate.now().plusDays(1),
+                date = LocalDate.now().plus(DatePeriod(days = 1)),
                 imgUrl = "https://picsum.photos/200/300",
                 imgShape = CircleShape
             ),
             CalendarEvent(
-                date = LocalDate.now().plusDays(2),
+                date = LocalDate.now().plus(DatePeriod(days = 2)),
                 imgUrl = "https://picsum.photos/200/300",
                 imgShape = RoundedCornerShape(8.dp)
             ),
             CalendarEvent(
-                date = LocalDate.now().plusDays(3),
+                date = LocalDate.now().plus(DatePeriod(days = 3)),
                 imgUrl = "https://picsum.photos/200/300",
                 imgShape = CircleShape
             ),
             CalendarEvent(
-                date = LocalDate.now().plusDays(4),
+                date = LocalDate.now().plus(DatePeriod(days = 4)),
                 imgUrl = "https://picsum.photos/200/300",
                 imgShape = RoundedCornerShape(8.dp)
             ),
             CalendarEvent(
-                date = LocalDate.now().plusDays(5),
+                date = LocalDate.now().plus(DatePeriod(days = 5)),
                 imgUrl = "https://picsum.photos/200/300",
                 imgShape = CircleShape
             ),
             CalendarEvent(
-                date = LocalDate.now().plusDays(6),
+                date = LocalDate.now().plus(DatePeriod(days = 6)),
                 imgUrl = "https://picsum.photos/200/300",
                 imgShape = RoundedCornerShape(8.dp)
             ),
             CalendarEvent(
-                date = LocalDate.now().plusDays(7),
+                date = LocalDate.now().plus(DatePeriod(days = 7)),
                 imgUrl = "https://picsum.photos/200/300",
                 imgShape = CircleShape
             ),
