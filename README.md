@@ -4,7 +4,7 @@
 
 ## Photo Calendar - A customizable Jetpack Compose calendar that allows you to add background image to specific days.
 
-![photo_calendar](https://github.com/user-attachments/assets/bbe5acbe-302b-45be-a341-1ee105ccf310)
+![photo_calendar](https://github.com/user-attachments/assets/f46a7b48-367a-4e3f-b4ee-f9e1fe053565)
 
 A fully customizable calendar component for Jetpack Compose.<br>
 It supports both horizontal scrolling calendars and grid-based calendars.<br>
@@ -53,11 +53,22 @@ allprojects {
 
 // App level build.gradle
 dependencies {
-    implementation("io.github.dongchyeon:photo-calendar:1.0.0")
+    implementation("org.jetbrains.kotlinx:kotlinx-datetime:0.6.1")
+    implementation("io.github.dongchyeon:photo-calendar:<latest_version>")
 }
 ```
 
 ## Usage
+
+### 🚀 **Migration Update**  
+Replace usages of `java.time.LocalDate` with `kotlinx.datetime.LocalDate`:
+```kotlin
+// Before
+import java.time.LocalDate
+
+// After
+import kotlinx.datetime.LocalDate
+```
 
 #### Grid-based Calendar Example
 
@@ -66,12 +77,12 @@ var selectedDate by remember { mutableStateOf(LocalDate.now()) }
 
 val events = listOf(
     CalendarEvent(
-        date = LocalDate.now().plusDays(1),
+        date = LocalDate.now().plus(DatePeriod(days = 1)),
         imgUrl = "https://picsum.photos/200/300",
         imgShape = CircleShape
     ),
     CalendarEvent(
-        date = LocalDate.now().plusDays(2),
+        date = LocalDate.now().plus(DatePeriod(days = 2)),
         imgUrl = "https://picsum.photos/200/300",
         imgShape = RoundedCornerShape(8.dp)
     ),
@@ -92,12 +103,12 @@ var selectedDate by remember { mutableStateOf(LocalDate.now()) }
 
 val events = listOf(
     CalendarEvent(
-        date = LocalDate.now().plusDays(1),
+        date = LocalDate.now().plus(DatePeriod(days = 1)),
         imgUrl = "https://picsum.photos/200/300",
         imgShape = CircleShape
     ),
     CalendarEvent(
-        date = LocalDate.now().plusDays(2),
+        date = LocalDate.now().plus(DatePeriod(days = 2)),
         imgUrl = "https://picsum.photos/200/300",
         imgShape = RoundedCornerShape(8.dp)
     ),
@@ -120,15 +131,15 @@ You can add events to specific dates using the CalendarEvent class. Each event c
 ```kotlin
 val events = listOf(
     CalendarEvent(
-        date = LocalDate.now().plusDays(1),
-        imgUrl = "https://example.com/image1.jpg",
+        date = LocalDate.now().plus(DatePeriod(days = 1)),
+        imgUrl = "https://picsum.photos/200/300",
         imgShape = CircleShape
     ),
     CalendarEvent(
-        date = LocalDate.now().plusDays(3),
-        imgUrl = "https://example.com/image2.jpg",
+        date = LocalDate.now().plus(DatePeriod(days = 3)),
+        imgUrl = "https://picsum.photos/200/300",
         imgShape = RoundedCornerShape(8.dp)
-    )
+    ),
 )
 
 HorizontalCalendar(
