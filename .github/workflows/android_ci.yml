@@ -1,0 +1,53 @@
+name: PhotoCalendar CI
+
+on:
+  push:
+    branches: [ main ]
+    paths:
+      - 'app/**'
+      - 'build.gradle'
+      - '**/*.kt'
+  pull_request:
+    branches: [ main ]
+    paths:
+      - 'app/**'
+      - 'build.gradle'
+      - '**/*.kt'
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      # Gradle Cache
+      - name: Cache Gradle packages
+        uses: actions/cache@v4
+        with:
+          path: |
+            ~/.gradle/caches
+            ~/.gradle/wrapper
+          key: ${{ runner.os }}-gradle-${{ hashFiles('gradle.properties', '**/*.gradle*', '**/gradle-wrapper.properties') }}
+          restore-keys: |
+            ${{ runner.os }}-gradle-
+
+      # Checkout Code
+      - name: Checkout the code
+        uses: actions/checkout@v4
+
+      # Setup JDK
+      - name: Setup JDK
+        uses: actions/setup-java@v4
+        with:
+          distribution: 'corretto'
+          java-version: '17'
+
+      # Setup Android SDK
+      - name: Setup Android SDK
+        uses: android-actions/setup-android@v3
+
+      # Grant Execute Permission
+      - name: Grant execute permission for gradlew
+        run: chmod +x gradlew
+
+      # Run Lint and Build
+      - name: Run lint and build
+        run: ./gradlew ktlintCheck assembleDebug
