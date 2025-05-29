@@ -8,7 +8,7 @@ plugins {
 
 android {
     namespace = "com.dongchyeon.calendar"
-    compileSdk = 34
+    compileSdk = 35
 
     defaultConfig {
         minSdk = 24
@@ -69,7 +69,7 @@ mavenPublishing {
 
     signAllPublications()
 
-    coordinates("io.github.dongchyeon", "photo-calendar", "1.0.1")
+    coordinates("io.github.dongchyeon", "photo-calendar", "1.0.2")
 
     pom {
         name.set("PhotoCalendar")
