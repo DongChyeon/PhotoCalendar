@@ -1,16 +1,17 @@
 plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.jetbrains.kotlin.android)
+    alias(libs.plugins.compose.compiler)
 }
 
 android {
     namespace = "com.dongchyeon.calendar"
-    compileSdk = 34
+    compileSdk = 35
 
     defaultConfig {
         applicationId = "com.dongchyeon.calendar"
+        targetSdk = 35
         minSdk = 24
-        targetSdk = 34
         versionCode = 1
         versionName = "1.0"
 
