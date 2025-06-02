@@ -103,3 +103,10 @@ google-services.json
 
 #NDK
 obj/
+
+/.kotlinc/
+/.kotlin/
+/.gradle/
+/.kotlinc/
+/.kotlintasks/
+/kotlinTransformedMetadataLibraries/
