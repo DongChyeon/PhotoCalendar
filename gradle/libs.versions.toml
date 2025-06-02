@@ -10,7 +10,7 @@ kotlinxDatetime = "0.6.2"
 lifecycleRuntimeKtx = "2.9.0"
 activityCompose = "1.10.1"
 composeBom = "2025.05.01"
-composeMultiPlatform = "1.7.0"
+composeMultiPlatform = "1.8.1"
 appcompat = "1.7.0"
 material = "1.12.0"
 mavenPublish = "0.29.0"
@@ -38,13 +38,12 @@ material = { group = "com.google.android.material", name = "material", version.r
 coil-compose = { group = "io.coil-kt.coil3", name = "coil-compose", version.ref = "coil" }
 coil-network = { group = "io.coil-kt.coil3", name = "coil-network-okhttp", version.ref = "coil" }
 
-compose-multiplatform = { group = "org.jetbrains.compose", name = "compose-multiplatform", version.ref = "composeMultiPlatform" }
-kotlin-multiplatform = { group = "org.jetbrains.kotlin", name = "kotlin-multiplatform", version.ref = "kotlin" }
-
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }
 android-library = { id = "com.android.library", version.ref = "agp" }
 compose-compiler = { id = "org.jetbrains.kotlin.plugin.compose", version.ref = "kotlin" }
+compose-multiplatform = { id = "org.jetbrains.compose", version.ref = "composeMultiPlatform" }
+kotlin-multiplatform = { id = "org.jetbrains.kotlin.multiplatform", version.ref = "kotlin" }
 jetbrains-kotlin-android = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }
 maven-publish = { id = "com.vanniktech.maven.publish", version.ref = "mavenPublish" }
 ktlint = { id = "org.jlleitschuh.gradle.ktlint", version.ref = "ktlint" }
