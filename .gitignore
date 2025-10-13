@@ -1,0 +1,171 @@
+# ------------------------------
+# Kotlin Multiplatform (Android, iOS, Desktop, Web)
+# ------------------------------
+
+# IntelliJ / Android Studio
+.idea
+*.iml
+.DS_Store
+out/
+captures/
+build/
+**/build/
+!src/**/build/  # Keep generated src build folders if needed
+.gradle/
+.local/
+local.properties
+workspace.xml
+tasks.xml
+
+# macOS
+.DS_Store
+.AppleDouble
+.LSOverride
+
+# Windows
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+
+# Kotlin / Gradle
+.gradle/
+.kotlinc/
+.kover/
+.koverage/
+.gradle-local/
+gradle-app.setting
+gradle.properties
+gradlew.bat
+gradlew*
+gradle/
+buildSrc/.gradle/
+buildSrc/build/
+
+# KMP common build output
+build/
+**/build/
+**/bin/
+**/obj/
+!src/**/build/  # Keep src builds if intentionally used
+
+# Kotlin/Native (iOS, macOS)
+*.klib
+*.kexe
+*.kcinterop/
+*.dSYM/
+kotlin-native-macos-*
+kotlin-native-linux-*
+kotlin-native-windows-*
+kotlinDaemon.*
+
+# Xcode
+*.xcodeproj/*
+!*.xcodeproj/project.pbxproj
+!*.xcodeproj/xcshareddata/
+!*.xcodeproj/project.xcworkspace/
+!*.xcworkspace/contents.xcworkspacedata
+**/xcshareddata/WorkspaceSettings.xcsettings
+DerivedData/
+xcuserdata/
+*.xcuserstate
+
+# Android specific
+local.properties
+*.apk
+*.ap_
+*.aab
+*.dex
+*.class
+*.log
+*.keystore
+*.jks
+*.hprof
+.externalNativeBuild/
+.cxx/
+*.so
+*.jar
+*.aar
+*.iml
+
+# Web / JS
+node_modules/
+npm-debug.log
+yarn-error.log
+dist/
+build/
+out/
+.tmp/
+.next/
+.vite/
+.env
+.env.*
+coverage/
+.vscode/
+
+# Compose Multiplatform (Desktop)
+*.db
+*.sqlite
+*.exe
+*.dll
+*.app/
+*.icns
+*.dmg
+*.pkg
+*.msi
+*.log
+logs/
+.kmp-cache/
+runtime/
+
+# Lint / CI tools
+ktlint*
+.ktlint-cache/
+.ktlint-gradle/
+.detekt/
+.detekt-report/
+lint-results.xml
+reports/
+test-results/
+jacoco/
+coverage/
+sonar/
+checkstyle/
+*.html
+*.xml
+
+# JetBrains IDE caches
+.idea/caches/
+.idea/libraries/
+.idea/modules.xml
+.idea/workspace.xml
+.idea/navEditor.xml
+.idea/assetWizardSettings.xml
+
+# Misc
+tmp/
+temp/
+.cache/
+.swp
+.swo
+*.swp
+*.swp~
+*.orig
+*.bak
+*.rej
+
+# CI/CD
+/build-outputs/
+test-reports/
+logs/
+reports/
+artifacts/
+*.lock
+*.pid
+
+# Ignore any local env or secrets
+.env.local
+.env.dev
+.env.production
+.env.staging
+secrets.properties
+secret.yaml
