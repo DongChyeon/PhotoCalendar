@@ -23,7 +23,7 @@ runner = "1.7.0"
 core = "1.7.0"
 ktor = "3.3.0"
 ktlint = "13.1.0"
-mavenPublish = "0.29.0"
+mavenPublish = "0.34.0"
 
 [libraries]
 coil3-coil-network-ktor = { module = "io.coil-kt.coil3:coil-network-ktor", version.ref = "coilNetworkKtor" }
