@@ -105,7 +105,7 @@ compose {
 }
 
 mavenPublishing {
-    coordinates("io.github.dongchyeon", "photo-calendar", "1.0.1")
+    coordinates("io.github.dongchyeon", "photo-calendar", "1.1.1")
 
     pom {
         name.set("PhotoCalendar")
