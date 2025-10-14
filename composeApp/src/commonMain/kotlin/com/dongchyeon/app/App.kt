@@ -18,6 +18,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import com.dongchyeon.calendar.CalendarEvent
 import com.dongchyeon.calendar.ui.Calendar
+import com.dongchyeon.calendar.ui.HorizontalCalendar
 import com.dongchyeon.calendar.util.now
 import kotlinx.datetime.DatePeriod
 import kotlinx.datetime.LocalDate
@@ -51,6 +52,12 @@ fun App() {
             )
 
             Calendar(
+                selectedDate = selectedDate,
+                events = events,
+            ) {
+                selectedDate = it
+            }
+            HorizontalCalendar(
                 selectedDate = selectedDate,
                 events = events,
             ) {
