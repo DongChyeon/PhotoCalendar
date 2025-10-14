@@ -35,10 +35,12 @@ internal fun DateYearMonth.plusMonths(months: Int): DateYearMonth {
 internal fun DateYearMonth.minusMonths(months: Int): DateYearMonth {
     return this.plusMonths(-months)
 }
+
 internal fun LocalDate.weekOfMonth(startDayOfWeek: DayOfWeek = DayOfWeek.SUNDAY): Int {
     val offset = (7 + this.dayOfWeek.ordinal - startDayOfWeek.ordinal) % 7
     return ((this.dayOfMonth + offset - 1) / 7) + 1
 }
+
 internal fun DateYearMonth.getNumberWeeks(
     startDayOfWeek: DayOfWeek = DayOfWeek.SUNDAY
 ): Int {
