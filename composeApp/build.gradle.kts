@@ -27,13 +27,14 @@ kotlin {
         }
     }
     
-    jvm()
+    jvm("desktop")
     
     sourceSets {
         androidMain.dependencies {
             implementation(compose.preview)
             implementation(libs.androidx.activity.compose)
         }
+
         commonMain.dependencies {
             implementation(compose.runtime)
             implementation(compose.foundation)
@@ -46,13 +47,15 @@ kotlin {
             implementation(libs.kotlinx.datetime)
             implementation(projects.calendar)
         }
+
         commonTest.dependencies {
             implementation(libs.kotlin.test)
         }
-        jvmMain.dependencies {
+
+        val desktopMain by getting
+        desktopMain.dependencies {
             implementation(compose.desktop.currentOs)
             implementation(libs.kotlinx.coroutinesSwing)
-            implementation("androidx.collection:collection:1.5.0")
         }
     }
 }

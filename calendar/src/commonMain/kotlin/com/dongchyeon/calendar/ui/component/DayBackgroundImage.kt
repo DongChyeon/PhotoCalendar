@@ -12,6 +12,7 @@ import androidx.compose.ui.graphics.Shape
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.unit.dp
 import coil3.compose.AsyncImage
+import coil3.compose.AsyncImagePainter
 import coil3.compose.LocalPlatformContext
 import coil3.request.ImageRequest
 
@@ -29,6 +30,20 @@ internal fun DayBackgroundImage(
     ) {
         AsyncImage(
             model = ImageRequest.Builder(context).data(imageUrl).build(),
+            onState = { state ->
+              when (state) {
+                    is AsyncImagePainter.State.Loading -> {
+                        println("Loading image..." )
+                    }
+                    is AsyncImagePainter.State.Error -> {
+                        println("Error loading image: ${state.result}" )
+                    }
+                    is AsyncImagePainter.State.Success -> {
+                        println("Image loaded successfully: ${state.result}" )
+                    }
+                    else -> Unit
+                }
+            },
             contentDescription = "image",
             contentScale = ContentScale.Crop
         )

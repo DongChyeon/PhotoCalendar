@@ -11,11 +11,6 @@ plugins {
 }
 
 kotlin {
-    jvmToolchain(21)
-
-    // Target declarations - add or remove as needed below. These define
-    // which platforms this KMP module supports.
-    // See: https://kotlinlang.org/docs/multiplatform-discover-project.html#targets
     androidLibrary {
         namespace = "com.dongchyeon.app"
         compileSdk = libs.versions.android.compileSdk.get().toInt()
@@ -43,13 +38,6 @@ kotlin {
         }
     }
 
-    // For iOS targets, this is also where you should
-    // configure native binary output. For more information, see:
-    // https://kotlinlang.org/docs/multiplatform-build-native-binaries.html#build-xcframeworks
-
-    // A step-by-step guide on how to include this library in an XCode
-    // project can be found here:
-    // https://developer.android.com/kotlin/multiplatform/migrate
     val xcfName = "calendarKit"
 
     listOf(
@@ -61,42 +49,31 @@ kotlin {
         }
     }
 
-    // Source set declarations.
-    // Declaring a target automatically creates a source set with the same name. By default, the
-    // Kotlin Gradle Plugin creates additional source sets that depend on each other, since it is
-    // common to share sources between related targets.
-    // See: https://kotlinlang.org/docs/multiplatform-hierarchy.html
     sourceSets {
-        commonMain {
-            dependencies {
-                implementation(libs.kotlin.stdlib)
+        commonMain.dependencies {
+            implementation(libs.kotlin.stdlib)
 
-                // Compose core (multiplatform)
-                implementation(compose.runtime)
-                implementation(compose.foundation)
-                implementation(compose.material3)
-                implementation(compose.ui)
-                implementation(compose.components.resources)
-                implementation(compose.components.uiToolingPreview)
+            // Compose core (multiplatform)
+            implementation(compose.runtime)
+            implementation(compose.foundation)
+            implementation(compose.material3)
+            implementation(compose.ui)
+            implementation(compose.components.resources)
+            implementation(compose.components.uiToolingPreview)
 
-                // KotlinX
-                implementation(libs.kotlinx.datetime)
-                implementation(libs.coil.compose)
-                implementation(libs.coil.compose.core)
-                implementation(libs.coil.network.ktor3)
-            }
+            // KotlinX
+            implementation(libs.kotlinx.datetime)
+            implementation(libs.coil.compose)
+            implementation(libs.coil.compose.core)
+            implementation(libs.coil.network.ktor3)
         }
 
-        commonTest {
-            dependencies {
-                implementation(libs.kotlin.test)
-            }
+        commonTest.dependencies {
+            implementation(libs.kotlin.test)
         }
 
-        androidMain {
-            dependencies {
-                implementation(libs.ktor.client.android)
-            }
+        androidMain.dependencies {
+            implementation(libs.ktor.client.android)
         }
 
         getByName("androidDeviceTest") {
@@ -113,10 +90,9 @@ kotlin {
             }
         }
 
-        jvmMain {
-            dependencies {
-                implementation(libs.ktor.client.java)
-            }
+        val desktopMain by getting
+        desktopMain.dependencies {
+            implementation(libs.ktor.client.java)
         }
     }
 }
