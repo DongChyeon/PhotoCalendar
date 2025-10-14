@@ -23,8 +23,6 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.RectangleShape
-import androidx.compose.ui.platform.LocalDensity
-import androidx.compose.ui.platform.LocalWindowInfo
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import com.dongchyeon.calendar.CalendarDayConfig
@@ -44,6 +42,7 @@ import com.dongchyeon.calendar.util.noRippleClickable
 import com.dongchyeon.calendar.util.now
 import com.dongchyeon.calendar.util.plusMonths
 import com.dongchyeon.calendar.util.previousOrSame
+import com.dongchyeon.calendar.util.rememberCalendarItemWidth
 import kotlinx.datetime.DatePeriod
 import kotlinx.datetime.DayOfWeek
 import kotlinx.datetime.LocalDate
@@ -311,19 +310,6 @@ private fun Day(
             }
         }
     }
-}
-
-@Composable
-private fun rememberCalendarItemWidth(dayGap: Dp = 8.dp): Pair<Boolean, Dp> {
-    val density = LocalDensity.current
-    val windowInfo = LocalWindowInfo.current
-
-    val screenWidthDp = with(density) { windowInfo.containerSize.width.toDp() }
-
-    val isTablet = screenWidthDp >= 600.dp
-    val itemWidth = (screenWidthDp - (dayGap * 8) - 16.dp) / 7f
-
-    return isTablet to itemWidth
 }
 
 @Preview
