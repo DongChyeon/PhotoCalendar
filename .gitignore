@@ -131,7 +131,6 @@ coverage/
 sonar/
 checkstyle/
 *.html
-*.xml
 
 # JetBrains IDE caches
 .idea/caches/
