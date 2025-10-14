@@ -116,7 +116,7 @@ kotlin {
 
         androidMain {
             dependencies {
-                implementation(libs.ktor.client.okhttp)
+                implementation(libs.ktor.client.android)
             }
         }
 

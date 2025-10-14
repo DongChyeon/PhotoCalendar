@@ -30,9 +30,6 @@ internal fun DayBackgroundImage(
         AsyncImage(
             model = ImageRequest.Builder(context).data(imageUrl).build(),
             contentDescription = "image",
-            onState = { state ->
-
-            },
             contentScale = ContentScale.Crop
         )
 
