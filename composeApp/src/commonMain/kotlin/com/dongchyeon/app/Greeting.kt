@@ -1,4 +1,4 @@
-package com.dongchyeon.calendar
+package com.dongchyeon.app
 
 class Greeting {
     private val platform = getPlatform()

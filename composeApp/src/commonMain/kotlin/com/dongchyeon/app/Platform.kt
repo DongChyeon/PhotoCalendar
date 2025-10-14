@@ -1,4 +1,4 @@
-package com.dongchyeon.calendar
+package com.dongchyeon.app
 
 interface Platform {
     val name: String

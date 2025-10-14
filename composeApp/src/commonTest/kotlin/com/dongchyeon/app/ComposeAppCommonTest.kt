@@ -1,4 +1,4 @@
-package com.dongchyeon.calendar
+package com.dongchyeon.app
 
 import kotlin.test.Test
 import kotlin.test.assertEquals

@@ -1,4 +1,4 @@
-package com.dongchyeon.calendar
+package com.dongchyeon.app
 
 class JsPlatform: Platform {
     override val name: String = "Web with Kotlin/JS"

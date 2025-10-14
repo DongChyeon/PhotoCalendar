@@ -54,6 +54,8 @@ kotlin {
             implementation(compose.components.uiToolingPreview)
             implementation(libs.androidx.lifecycle.viewmodelCompose)
             implementation(libs.androidx.lifecycle.runtimeCompose)
+            implementation(libs.kotlinx.datetime)
+            implementation(projects.calendar)
         }
         commonTest.dependencies {
             implementation(libs.kotlin.test)
@@ -61,16 +63,17 @@ kotlin {
         jvmMain.dependencies {
             implementation(compose.desktop.currentOs)
             implementation(libs.kotlinx.coroutinesSwing)
+            implementation("androidx.collection:collection:1.5.0")
         }
     }
 }
 
 android {
-    namespace = "com.dongchyeon.calendar"
+    namespace = "com.dongchyeon.app"
     compileSdk = libs.versions.android.compileSdk.get().toInt()
 
     defaultConfig {
-        applicationId = "com.dongchyeon.calendar"
+        applicationId = "com.dongchyeon.app"
         minSdk = libs.versions.android.minSdk.get().toInt()
         targetSdk = libs.versions.android.targetSdk.get().toInt()
         versionCode = 1
@@ -98,11 +101,11 @@ dependencies {
 
 compose.desktop {
     application {
-        mainClass = "com.dongchyeon.calendar.MainKt"
+        mainClass = "com.dongchyeon.app.MainKt"
 
         nativeDistributions {
             targetFormats(TargetFormat.Dmg, TargetFormat.Msi, TargetFormat.Deb)
-            packageName = "com.dongchyeon.calendar"
+            packageName = "com.dongchyeon.app"
             packageVersion = "1.0.0"
         }
     }

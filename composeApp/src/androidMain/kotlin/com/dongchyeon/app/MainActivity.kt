@@ -1,4 +1,4 @@
-package com.dongchyeon.calendar
+package com.dongchyeon.app
 
 import android.os.Bundle
 import androidx.activity.ComponentActivity
